@@ -12,10 +12,63 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body>
-    <h1 class="text-red-500">Hello</h1>
-    <button class="btn btn-accent">Accent</button>
 
+    <!-- Google Font Giest -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-[#F8FAFC]">
+    <div class="hero min-h-screen">
+      <div class="card md:w-[28%] bg-base-100  shadow-2xl">
+        <div class="card-body">
+          <img class="mx-auto w-fit" src="assets/github-logo.png" alt="" />
+          <h1 class="text-center text-[#1F2937] text-2xl/3 font-semibold mt-3">
+            GitHub Issues Tracker
+          </h1>
+          <p class="text-[#64748B] text-center mb-3">
+            Sign in to manage your issues
+          </p>
+          <fieldset class="fieldset">
+            <label class="label font-semibold text-[#3D3746]">Username</label>
+            <input
+              type="email"
+              class="input w-full"
+              placeholder="Enter Username"
+            />
+            <label class="label font-semibold text-[#3D3746]">Password</label>
+            <input
+              type="password"
+              class="input w-full"
+              placeholder="Enter Password"
+            />
+            <button class="btn bg-[#4A00FF] rounded-md text-white mt-4 py-6">
+              Sign In
+            </button>
+          </fieldset>
+          <div class="flex items-center my-6">
+            <div class="flex-grow border-t border-[1px] border-gray-300"></div>
+
+            <span class="mx-3 text-[#64748B] text-sm font-medium"> OR </span>
+
+            <div class="flex-grow border-t border-[1px] border-gray-300"></div>
+          </div>
+          <h1 class="text-[#64748B] text-sm text-center">Demo Credentials:</h1>
+          <div class="bg-[#F8FAFC] rounded-2xl p-6">
+            <h1 class="text-[#64748B] text-center"><span class="font-semibold text-black">Username:</span> admin</h1>
+            <h1 class="text-[#64748B] text-center"><span class="font-semibold text-black">Password:</span> admin123</h1>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
