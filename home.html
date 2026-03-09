@@ -35,7 +35,7 @@
     <body class="bg-[#F8FAFC] min-h-screen">
         <nav class="bg-white">
             <div
-                class="nav-content max-w-7xl mx-auto py-6 flex justify-between items-center"
+                class="nav-content max-w-7xl mx-auto py-6 px-4 md:px-0 flex justify-between items-center"
             >
                 <a href="">
                     <div class="flex justify-start items-center gap-1">
@@ -44,18 +44,18 @@
                             src="assets/github-logo.png"
                             alt=""
                         />
-                        <h1 class="text-[#1F2937] font-semibold text-2xl">
+                        <h1 class="text-[#1F2937] font-semibold text-2xl hidden md:inline-block">
                             GitHub Issues Tracker
                         </h1>
                     </div>
                 </a>
 
-                <div class="flex gap-4">
+                <div class="flex gap-1 md:gap-4">
                     <div class="relative group">
                         <input
                             onclick="handleSearch()"
                             id="search-issues"
-                            class="p-3 border-2 border-gray-300 focus:border-purple-600 rounded-md pr-24 focus:placeholder:text-white"
+                            class="p-3 w-32 md:w-64 border-2 border-gray-300 focus:border-purple-600 rounded-md pr-24 focus:placeholder:text-white"
                             type="text"
                             placeholder="      Search issues..."
                         />
@@ -95,8 +95,8 @@
                                 d="M12 4.5v15m7.5-7.5h-15"
                             />
                         </svg>
-
-                        New Issue
+                        <span class="hidden md:inline">New Issue</span>
+                        
                     </button>
                 </div>
             </div>
@@ -104,13 +104,13 @@
 
         <!-- Tab Section -->
         <section
-            class="max-w-6xl mx-auto p-6 bg-white rounded-md shadow-lg mt-14"
+            class="max-w-6xl mx-4 md:mx-auto p-6 bg-white rounded-md shadow-lg mt-14 "
         >
-            <ul class="flex justify-start gap-2">
+            <ul class="flex justify-between md:justify-start gap-2">
                 <li
                     id="all"
                     onclick="handleTab(event)"
-                    class="tab active text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
+                    class="tab active text-[#64748B] font-semibold py-2 px-5 md:px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
                 >
                     All
                 </li>
@@ -118,7 +118,7 @@
                 <li
                     id="open"
                     onclick="handleTab(event)"
-                    class="tab text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
+                    class="tab text-[#64748B] font-semibold py-2 px-5 md:px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
                 >
                     Open
                 </li>
@@ -126,7 +126,7 @@
                 <li
                     id="closed"
                     onclick="handleTab(event)"
-                    class="tab text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
+                    class="tab text-[#64748B] font-semibold py-2 px-5 md:px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500 hover:bg-[#4A00FF] hover:text-white"
                 >
                     Closed
                 </li>
@@ -137,9 +137,9 @@
 
         <section class="max-w-6xl mx-auto bg-white rounded-md shadow-lg mt-4">
             <div
-                class="card-container-header p-6 flex justify-between items-center"
+                class="card-container-header p-6 md:flex justify-between items-center"
             >
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 mb-4">
                     <div
                         class="flex items-center justify-center w-10 h-10 bg-[#ECE4FF] rounded-full"
                     >
@@ -156,11 +156,11 @@
                 </div>
 
                 <div>
-                    <h1 class="flex items-center gap-2">
+                    <h1 class="flex justify-center md:justify-normal items-center gap-2">
                         <div class="w-3 h-3 rounded-full bg-green-600"></div>
                         Open
                         <div
-                            class="w-3 h-3 ml-2 rounded-full bg-purple-500"
+                            class="w-3 h-3 ml-[40%]  md:ml-2 rounded-full bg-purple-500"
                         ></div>
                         Closed
                     </h1>
@@ -170,7 +170,7 @@
             <!-- Card Container -->
             <div
                 id="card-container"
-                class="card-container w-full p-6 bg-[#FBFBFB] border-t-2 border-gray-200 grid grid-cols-4 gap-3"
+                class="card-container w-full p-6 bg-[#FBFBFB] border-t-2 border-gray-200 grid md:grid-cols-4 gap-3"
             >
                 
             </div>
