@@ -1,5 +1,62 @@
 let cards = [];
 const issuesCount = document.getElementById("issues-count");
+const modalTitle = document.getElementById("modal-title");
+const modalStatus = document.getElementById("modal-status");
+const modalAuthor = document.getElementById("modal-author");
+const modalDate = document.getElementById("modal-date");
+const modalLabel0 = document.getElementById("modal-label-0");
+const modalLabel1 = document.getElementById("modal-label-1");
+const modalDescription = document.getElementById("modal-description");
+const modalAssignee = document.getElementById("modal-assignee");
+const modalPriority = document.getElementById("modal-priority");
+
+function openModal(index) {
+  const card = cards[index];
+
+  modalTitle.innerText = card.title;
+  modalStatus.innerText = card.status === "open" ? "Opened" : "Closed";
+  modalAuthor.innerText = card.author;
+  modalDate.innerText =`• ${new Date(card.createdAt).toLocaleDateString("en-US")}` 
+  modalLabel0.innerHTML = `<span
+                                class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-[#EF4444] border border-red-300 bg-[#FECACA] rounded-full"
+                            >
+                                <img
+                                    class="w-3 h-3 mt-[0.8px]"
+                                    src="assets/bug.svg"
+                                    alt=""
+                                />
+
+                                ${card.labels[0]}
+                            </span>`;
+  //   modalLabel0.innerText = card.labels[0]
+  modalLabel1.innerHTML = `<span
+                                class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-[#D97706] border border-orange-300 bg-[#FDE68A] rounded-full"
+                            >
+                                <img
+                                    class="w-3 h-3 mt-[0.8px]"
+                                    src="assets/helpWanted.svg"
+                                    alt=""
+                                />
+                                ${card.labels[1]}
+                            </span>`;
+  //   modalLabel1.innerText = card.labels[1]
+  modalDescription.innerText = card.description;
+  modalAssignee.innerText = card.author;
+  //   modalPriority.innerText = card.priority.toUpperCase();
+  modalPriority.innerHTML = `<span
+                                class="px-4 py-1 text-sm font-semibold -ml-2 ${
+                                  card.priority === "high"
+                                    ? "text-red-500 bg-red-100"
+                                    : card.priority === "medium"
+                                      ? "text-yellow-500 bg-orange-100"
+                                      : "text-gray-500 bg-gray-200"
+                                } rounded-full"
+                            >
+                                ${card.priority.toUpperCase()}
+                            </span>`;
+
+  document.getElementById("my_modal_5").showModal();
+}
 
 const fetchData = async () => {
   const res = await fetch(
@@ -17,12 +74,14 @@ const showCards = (cards) => {
 
   issuesCount.innerText = cards.length;
   cardContainer.innerHTML = cards
-    .map((card) => {
+    .map((card, idx) => {
       const formateDate = new Date(card.createdAt).toLocaleDateString("en-US");
+
       return `
         <div
                     id="card"
-                    class="card max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    class="card cursor-pointer max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    onclick="openModal(${idx})"
                 >
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
@@ -110,7 +169,7 @@ const handleTab = async (e) => {
     ).length;
 
     cardContainer.innerHTML = cards
-      .map((card) => {
+      .map((card, idx) => {
         if (card.status === "open") {
           const formateDate = new Date(card.createdAt).toLocaleDateString(
             "en-US",
@@ -118,7 +177,8 @@ const handleTab = async (e) => {
           return `
         <div
                     id="card"
-                    class="card max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    class="card cursor-pointer max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    onclick="openModal(${idx})"
                 >
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
@@ -195,7 +255,7 @@ const handleTab = async (e) => {
       (card) => card.status === "closed",
     ).length;
     cardContainer.innerHTML = cards
-      .map((card) => {
+      .map((card, idx) => {
         if (card.status === "closed") {
           const formateDate = new Date(card.createdAt).toLocaleDateString(
             "en-US",
@@ -203,7 +263,8 @@ const handleTab = async (e) => {
           return `
         <div
                     id="card"
-                    class="card max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    class="card cursor-pointer max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    onclick="openModal(${idx})"
                 >
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
@@ -278,14 +339,15 @@ const handleTab = async (e) => {
   } else {
     issuesCount.innerText = cards.length;
     cardContainer.innerHTML = cards
-      .map((card) => {
+      .map((card, idx) => {
         const formateDate = new Date(card.createdAt).toLocaleDateString(
           "en-US",
         );
         return `
         <div
                     id="card"
-                    class="card max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    class="card cursor-pointer max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
+                    onclick="openModal(${idx})"
                 >
                     <div class="p-5">
                         <div class="flex justify-between items-start mb-3">
