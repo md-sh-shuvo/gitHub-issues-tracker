@@ -25,6 +25,10 @@
             * {
                 font-family: "Geist", sans-serif;
             }
+            .active {
+                background-color: #4a00ff;
+                color: white;
+            }
         </style>
     </head>
 
@@ -75,7 +79,7 @@
                     </div>
 
                     <button
-                        class="flex items-center gap-1 px-4 py-2 text-white font-semibold rounded-xl bg-[#4A00FF] hover:scale-105 transition shadow-md cursor-pointer"
+                        class="flex items-center gap-1 px-4 py-2 text-white font-semibold rounded-md bg-[#4A00FF] hover:scale-105 transition shadow-md cursor-pointer"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -99,21 +103,35 @@
         </nav>
 
         <!-- Tab Section -->
-        <section class="max-w-6xl mx-auto p-6 bg-white rounded-md shadow-lg mt-14">
+        <section
+            class="max-w-6xl mx-auto p-6 bg-white rounded-md shadow-lg mt-14"
+        >
             <ul class="flex justify-start gap-2">
-              <a href="">
-                <li class="text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:bg-[#4A00FF] hover:text-white">All</li>
-              </a>
-              <a href="">
-                <li class="text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:bg-[#4A00FF] hover:text-white">Open</li>
-              </a>
-              <a href="">
-                <li class="text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:bg-[#4A00FF] hover:text-white">Closed</li>
-              </a>
+                <li
+                    onclick="handleTab(event)"
+                    class="tab active text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500  hover:bg-[#4A00FF] hover:text-white"
+                >
+                    All
+                </li>
+
+                <li
+                    onclick="handleTab(event)"
+                    class="tab text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500  hover:bg-[#4A00FF] hover:text-white"
+                >
+                    Open
+                </li>
+
+                <li
+                    onclick="handleTab(event)"
+                    class="tab text-[#64748B] font-semibold py-2 px-10 border-2 border-[#747e8e5e] rounded-md hover:shadow-lg hover:shadow-gray-500  hover:bg-[#4A00FF] hover:text-white"
+                >
+                    Closed
+                </li>
             </ul>
         </section>
 
         <script src="scripts/signin.js"></script>
         <script src="scripts/search.js"></script>
+        <script src="scripts/script.js"></script>
     </body>
 </html>
