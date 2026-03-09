@@ -1,4 +1,5 @@
 let cards = [];
+const cardContainer = document.getElementById("card-container");
 const issuesCount = document.getElementById("issues-count");
 const modalTitle = document.getElementById("modal-title");
 const modalStatus = document.getElementById("modal-status");
@@ -16,7 +17,7 @@ function openModal(index) {
   modalTitle.innerText = card.title;
   modalStatus.innerText = card.status === "open" ? "Opened" : "Closed";
   modalAuthor.innerText = card.author;
-  modalDate.innerText =`• ${new Date(card.createdAt).toLocaleDateString("en-US")}` 
+  modalDate.innerText = `• ${new Date(card.createdAt).toLocaleDateString("en-US")}`;
   modalLabel0.innerHTML = `<span
                                 class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-[#EF4444] border border-red-300 bg-[#FECACA] rounded-full"
                             >
@@ -59,6 +60,7 @@ function openModal(index) {
 }
 
 const fetchData = async () => {
+  cardContainer.innerHTML = '<span class="loading loading-dots loading-lg mx-auto"></span>';
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
@@ -68,7 +70,7 @@ const fetchData = async () => {
 };
 
 fetchData();
-const cardContainer = document.getElementById("card-container");
+
 const showCards = (cards) => {
   console.log(cards);
 
@@ -78,6 +80,7 @@ const showCards = (cards) => {
       const formateDate = new Date(card.createdAt).toLocaleDateString("en-US");
 
       return `
+      
         <div
                     id="card"
                     class="card cursor-pointer max-w-sm bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden border-t-4  ${card.status === "open" ? "border-t-green-500" : "border-t-purple-500"} justify-between"
