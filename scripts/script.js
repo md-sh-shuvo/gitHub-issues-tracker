@@ -1,3 +1,6 @@
+
+
+
 let cards = [];
 let currentCards = [];
 
@@ -30,13 +33,12 @@ const fetchData = async () => {
   showCards(currentCards);
 };
 
-fetchData();
 
+fetchData();
 
 
 const showCards = (cards) => {
   issuesCount.innerText = cards.length;
-
 
   cardContainer.innerHTML = cards
     .map((card) => {
@@ -86,13 +88,14 @@ const showCards = (cards) => {
 
             <span class="flex items-center gap-1 px-3 py-1 text-[12px] font-medium text-[#EF4444] border border-red-300 bg-[#FECACA] rounded-full">
               <img class="w-3 h-3 mt-[0.8px]" src="assets/bug.svg"/>
-              ${card.labels[0]}
+              ${card.labels[0] || ""}
             </span>
 
             <span class="flex items-center gap-1 px-3 py-1 text-[12px] font-medium text-[#D97706] border border-orange-300 bg-[#FDE68A] rounded-full">
               <img class="w-3 h-3 mt-[0.8px]" src="assets/helpWanted.svg"/>
-              ${card.labels[1]}
+              ${card.labels[1] || ""}
             </span>
+
           </div>
         </div>
 
@@ -102,7 +105,6 @@ const showCards = (cards) => {
         </div>
 
       </div>
-      
       `;
     })
     .join("");
@@ -117,9 +119,12 @@ function openModal(id) {
   modalTitle.innerText = card.title;
   modalStatus.innerText = card.status === "open" ? "Opened" : "Closed";
   modalAuthor.innerText = card.author;
-  modalDate.innerText = `• ${new Date(card.createdAt).toLocaleDateString("en-US")}`;
+  modalDate.innerText = `• ${new Date(card.createdAt).toLocaleDateString(
+    "en-US",
+  )}`;
   modalDescription.innerText = card.description;
   modalAssignee.innerText = card.author;
+
   modalLabel0.innerHTML = `
   <span class="flex items-center gap-1 px-3 py-1 text-sm font-medium text-[#EF4444] border border-red-300 bg-[#FECACA] rounded-full">
     <img class="w-3 h-3 mt-[0.8px]" src="assets/bug.svg"/>
@@ -149,40 +154,51 @@ function openModal(id) {
 
 
 
-const handleTab = (e) => {
+const handleTab = async (e) => {
   const tabs = document.querySelectorAll(".tab");
 
   tabs.forEach((tab) => tab.classList.remove("active"));
   e.target.classList.add("active");
 
   if (e.target.id === "open") {
+    cardContainer.innerHTML =
+    '<span class="loading loading-dots loading-lg mx-auto"></span>';
     currentCards = cards.filter((card) => card.status === "open");
   } else if (e.target.id === "closed") {
+    cardContainer.innerHTML =
+    '<span class="loading loading-dots loading-lg mx-auto"></span>';
     currentCards = cards.filter((card) => card.status === "closed");
   } else {
+    cardContainer.innerHTML =
+    '<span class="loading loading-dots loading-lg mx-auto"></span>';
     currentCards = cards;
   }
 
+  await new Promise(resolve => setTimeout(resolve, 500))
   showCards(currentCards);
 };
 
 
 
 
-searchInput.addEventListener("input", (e) => {
-  const text = e.target.value.toLowerCase().trim();
-
+searchInput.addEventListener("input", async (e) => {
+  const text = e.target.value.trim();
   if (!text) {
     showCards(currentCards);
     return;
   }
 
-  const filtered = currentCards.filter(
-    (card) =>
-      card.title.toLowerCase().includes(text) ||
-      card.description.toLowerCase().includes(text) ||
-      card.author.toLowerCase().includes(text),
+
+  cardContainer.innerHTML =
+    '<span class="loading loading-dots loading-lg mx-auto"></span>';
+
+  const res = await fetch(
+    `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`,
   );
 
-  showCards(filtered);
+
+
+  const data = await res.json();
+
+  showCards(data.data);
 });
